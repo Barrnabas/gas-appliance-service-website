@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/layout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations();
+---
+
+<Layout title={`${t('nav.about')} | ${t('site.title')}`}>
+
+    <section class="page-hero container">
+        <div class="content">
+            <span class="eyebrow">{t('about.title')}</span>
+            <h1>{t('about.subtitle')}</h1>
+        </div>
+    </section>
+
+    <section class="about-content container fade-in-up">
+        <div class="text-block">
+            <h2>{t('about.bio.title')}</h2>
+            <p class="lead-text">{t('about.bio.text.1')}</p>
+            <p>{t('about.bio.text.2')}</p>
+        </div>
+
+        <div class="qualifications-card">
+            <h3>📜 {t('about.quals.title')}</h3>
+            <ul class="quals-list">
+                <li>
+                    <span class="check">✓</span>
+                    <span>{t('about.qual.1')}</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span>{t('about.qual.2')}</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span>{t('about.qual.3')}</span>
+                </li>
+                <li>
+                    <span class="check">✓</span>
+                    <span>{t('about.qual.4')}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="about-cta">
+            <h3>{t('about.cta.title')}</h3>
+            <a href="/contact" class="btn-primary">{t('about.cta.btn')}</a>
+        </div>
+    </section>
+
+</Layout>
+
+<style lang="scss">
+  .page-hero {
+    padding: 4rem 1.5rem 2rem;
+    .content {
+      max-width: 1000px;
+      text-align: center;
+      margin: 0 auto;
+      .eyebrow {
+        color: var(--primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        color: var(--dark);
+      }
+    }
+  }
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+
+    .text-block {
+      text-align: center;
+      margin-bottom: 4rem;
+
+      h2 {
+        font-size: 1.8rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+      }
+
+      .lead-text {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+    }
+
+    .qualifications-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-md);
+      padding: 3rem;
+      border-radius: 12px;
+      margin-bottom: 4rem;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 2rem;
+        font-size: 1.5rem;
+        color: var(--dark);
+        text-align: center;
+        border-bottom: 2px solid var(--gray-100);
+        padding-bottom: 1rem;
+      }
+
+      .quals-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+
+        li {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+          font-size: 1.1rem;
+          color: var(--dark);
+          font-weight: 500;
+          line-height: 1.5;
+
+          .check {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            background: rgba(var(--primary-rgb), 0.1);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    .about-cta {
+      text-align: center;
+      background: var(--light);
+      padding: 3rem;
+      border-radius: 12px;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+        color: var(--dark);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-content .qualifications-card {
+      padding: 2rem 1.5rem;
+
+      li { font-size: 1rem !important; }
+    }
+  }
+</style>

@@ -1,0 +1,336 @@
+---
+import Layout from '../layouts/layout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations();
+---
+
+<Layout title={`${t('nav.services')} | ${t('site.title')}`}>
+
+    <section class="page-hero container">
+        <div class="content">
+            <span class="eyebrow">{t('services.title')}</span>
+            <h1>{t('services.subtitle')}</h1>
+        </div>
+    </section>
+
+    <section class="services-list container">
+
+        <div class="consumer-grid">
+            <div class="service-card">
+                <div class="icon-wrapper">🧹</div>
+                <div class="card-content">
+                    <h3>{t('service.1.name')}</h3>
+                    <p class="desc">{t('service.1.desc')}</p>
+                </div>
+            </div>
+
+            <div class="service-card highlight-border">
+                <div class="popular-badge">{t('service.2.badge')}</div>
+                <div class="icon-wrapper">🔧</div>
+                <div class="card-content">
+                    <h3>{t('service.2.name')}</h3>
+                    <p class="desc">{t('service.2.desc')}</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper">⚙️</div>
+                <div class="card-content">
+                    <h3>{t('service.3.name')}</h3>
+                    <p class="desc">{t('service.3.desc')}</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="icon-wrapper">🔥</div>
+                <div class="card-content">
+                    <h3>{t('service.4.name')}</h3>
+                    <p class="desc">{t('service.4.desc')}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="b2b-card">
+            <div class="b2b-icon">📋</div>
+            <div class="b2b-content">
+                <div class="b2b-header">
+                    <h3>{t('service.5.name')}</h3>
+                </div>
+                <p class="desc">{t('service.5.desc')}</p>
+            </div>
+        </div>
+
+        <div class="services-cta">
+            <h3>{t('services.cta.title')}</h3>
+            <p>{t('services.cta.desc')}</p>
+            <a href="/contact" class="btn-primary">{t('services.cta.btn')}</a>
+        </div>
+    </section>
+
+    <section class="process container">
+        <h2>{t('process.title')}</h2>
+        <div class="timeline">
+            <div class="step">
+                <div class="number">01</div>
+                <div class="content">
+                    <h3>{t('process.1.title')}</h3>
+                    <p>{t('process.1.desc')}</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="number">02</div>
+                <div class="content">
+                    <h3>{t('process.2.title')}</h3>
+                    <p>{t('process.2.desc')}</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="number">03</div>
+                <div class="content">
+                    <h3>{t('process.3.title')}</h3>
+                    <p>{t('process.3.desc')}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style lang="scss">
+  .page-hero {
+    padding: 4rem 1.5rem 2rem;
+    .content {
+      max-width: 1000px;
+      text-align: center;
+      margin: 0 auto;
+      .eyebrow {
+        color: var(--primary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  .services-list {
+    padding: 2rem 1.5rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    /* 2x2 Grid for Residential Services */
+    .consumer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr; /* Stacks to 1 column on mobile */
+      }
+    }
+
+    /* Modern List-Style Cards */
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      padding: 2rem;
+      border-radius: 12px;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+
+      &.highlight-border {
+        border: 2px solid var(--accent);
+      }
+
+      .popular-badge {
+        position: absolute;
+        top: -12px;
+        right: 20px;
+        background: var(--accent);
+        color: white;
+        padding: 0.2rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .icon-wrapper {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        background: rgba(var(--primary-rgb), 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      }
+
+      .card-content {
+        h3 {
+          margin: 0 0 0.5rem 0;
+          font-size: 1.3rem;
+          color: var(--dark);
+        }
+        .desc {
+          color: var(--text-muted);
+          margin-bottom: 1rem;
+          line-height: 1.5;
+          font-size: 0.95rem;
+        }
+      }
+    }
+
+    /* Wide Horizontal Card for B2B */
+    .b2b-card {
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 4rem;
+      box-shadow: var(--shadow-md);
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .b2b-icon {
+        flex-shrink: 0;
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+      }
+
+      .b2b-content {
+        flex-grow: 1;
+
+        .b2b-header {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 0.5rem;
+
+          @media (max-width: 768px) {
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--white);
+          }
+          .corp-badge {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+          }
+        }
+
+        .desc {
+          color: var(--gray-200);
+          margin-bottom: 1.5rem;
+          line-height: 1.6;
+        }
+      }
+    }
+
+    /* Reusable Price Tag */
+    .price-tag {
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(var(--primary-rgb), 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+
+    .b2b-card .price-tag {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+    }
+
+    /* Call to Action */
+    .services-cta {
+      background: var(--light);
+      border: 1px solid var(--gray-200);
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+
+      h3 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.6rem; color: var(--dark); }
+      p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
+      .btn-primary { font-size: 1.1rem; padding: 0.8rem 2rem; }
+    }
+  }
+
+  .process {
+    padding: 2rem 1.5rem 6rem;
+    h2 { text-align: center; margin-bottom: 3rem; font-size: 2rem; }
+
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      border-left: 2px solid var(--gray-200);
+      padding-left: 2rem;
+    }
+
+    .step {
+      position: relative;
+      margin-bottom: 3rem;
+
+      .number {
+        position: absolute;
+        left: -3.3rem;
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        box-shadow: 0 0 0 5px var(--white);
+      }
+
+      .content {
+        h3 { margin: 0 0 0.5rem 0; color: var(--primary); font-size: 1.3rem; }
+        p { margin: 0; color: var(--text-main); line-height: 1.5; }
+      }
+    }
+  }
+</style>

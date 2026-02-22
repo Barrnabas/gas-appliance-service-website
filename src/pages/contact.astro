@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/layout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations();
+---
+
+<Layout title={`${t('nav.contact')} | ${t('site.title')}`}>
+
+    <section class="contact-page container fade-in-up">
+        <div class="header-content">
+            <span class="eyebrow">{t('contact.title')}</span>
+            <h1>{t('contact.subtitle')}</h1>
+            <p class="subtitle-text">{t('contact.desc')}</p>
+        </div>
+
+        <div class="contact-cards">
+            <div class="card phone-card highlight">
+                <h3>{t('contact.booking.title')}</h3>
+                <p>{t('contact.booking.subtitle')}</p>
+
+                <a href="tel:+36301234567" class="btn-primary phone-btn">{t('contact.booking.btn')}</a>
+
+                <p class="availability">
+                    {t('contact.booking.availability.main')}<br>
+                    <span class="text-muted">{t('contact.booking.availability.sub')}</span>
+                </p>
+            </div>
+
+            <div class="secondary-info">
+                <div class="info-item">
+                    <div class="icon-small">✉️</div>
+                    <div>
+                        <span class="label">{t('contact.info.email')}</span>
+                        <a href={`mailto:${t('contact.info.email.address')}`} class="link">
+                            {t('contact.info.email.address')}
+                        </a>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-small">📍</div>
+                    <div>
+                        <span class="label">{t('contact.info.location')}</span>
+                        <span class="text">{t('contact.info.location.text')}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<style lang="scss">
+  .contact-page {
+    padding: 4rem 1.5rem 8rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .header-content {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    .eyebrow {
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      color: var(--dark);
+    }
+
+    .subtitle-text {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+  }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .phone-card {
+    background: var(--white);
+    border: 2px solid var(--primary);
+    box-shadow: var(--shadow-md);
+    padding: 3.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    .phone-btn {
+      font-size: 1.4rem;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      display: inline-block;
+      box-shadow: 0 4px 14px rgba(var(--primary-rgb), 0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .availability {
+      margin-bottom: 0;
+      font-size: 1rem;
+      color: var(--dark);
+      font-weight: 600;
+      line-height: 1.6;
+
+      .text-muted {
+        font-weight: 400;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  /* Alsó 2 kis infó kártya */
+  .secondary-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    .info-item {
+      background: var(--light);
+      border: 1px solid var(--gray-200);
+      padding: 1.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+
+      .icon-small {
+        font-size: 1.8rem;
+        background: rgba(var(--primary-rgb), 0.1);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .label {
+        display: block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+
+      .link, .text {
+        font-size: 1.1rem;
+        color: var(--dark);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .link:hover {
+        color: var(--primary);
+      }
+    }
+  }
+</style>

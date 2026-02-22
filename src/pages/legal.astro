@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/layout.astro';
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations();
+---
+
+<Layout title={`Jogi Nyilatkozat | ${t('site.title')}`}>
+    <section class="legal-page container">
+        <h1>Jogi Nyilatkozat</h1>
+
+        <div class="legal-section">
+            <h2>1. Impresszum</h2>
+            <p>A weboldal üzemeltetőjének adatai:</p>
+            <ul>
+                <li><strong>Név:</strong> Laczkó Tibor (Egyéni vállalkozó)</li>
+                <li><strong>Székhely:</strong> 2241 Sülysáp, Fő utca ...</li>
+                <li><strong>Adószám:</strong> [Adószám]</li>
+                <li><strong>Nyilvántartási szám:</strong> [Nyilvántartási szám beírása]</li>
+                <li><strong>Kamarai tagság:</strong> [Pl. Pest Megyei Kereskedelmi és Iparkamara]</li>
+                <li><strong>E-mail:</strong> {t('contact.info.email.address')}</li>
+                <li><strong>Telefon:</strong> {t('contact.booking.btn').replace('Hívás: ', '')}</li>
+            </ul>
+            <p><strong>Tárhelyszolgáltató:</strong> [Pl. Netlify / Vercel / GitHub adatai]</p>
+        </div>
+
+        <div class="legal-section">
+            <h2>2. Adatkezelési Tájékoztató</h2>
+            <p>Ez a tájékoztató a weboldal látogatói számára készült a GDPR előírásainak megfelelően.</p>
+            <h3>Adatkezelés célja</h3>
+            <p>A weboldalon nem található kapcsolatfelvételi űrlap, így közvetlen adatgyűjtés nem történik. Amennyiben Ön telefonon vagy e-mailben keres meg, adatait (név, cím, telefonszám) kizárólag a kért szolgáltatás elvégzéséhez és a törvényben előírt számlázási kötelezettség teljesítéséhez használom fel.</p>
+
+            <h3>Sütik (Cookies) és Harmadik fél</h3>
+            <p>A weboldal a térkép megjelenítéséhez (Leaflet) és betűtípusokhoz technikai jellegű szolgáltatásokat vesz igénybe, amelyek során névtelen adatok (IP-cím) kerülhetnek továbbításra a szolgáltatónak. Saját marketing célú adatgyűjtést vagy követést nem végzek.</p>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+  .legal-page {
+    padding: 6rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: var(--primary);
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .legal-section {
+      margin-bottom: 3rem;
+      line-height: 1.7;
+      color: var(--text-main);
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+</style>

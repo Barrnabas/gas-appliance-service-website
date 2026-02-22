@@ -1,0 +1,130 @@
+---
+const { servicedCities = [] } = Astro.props;
+---
+
+<div id="service-map" class="map-container"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script define:vars={{ servicedCities }}>
+    document.addEventListener('astro:page-load', async () => {
+        const container = L.DomUtil.get('service-map');
+        if(container != null){
+            container._leaflet_id = null;
+        }
+
+        const map = L.map('service-map', {
+            zoomControl: true,
+            attributionControl: false,
+            minZoom: 9,
+            maxBoundViscosity: 1.0,
+        });
+
+        try {
+            const response = await fetch('/pest_borders.geojson');
+
+            if (!response.ok) {
+                throw new Error(`File not found! Server returned status: ${response.status}`);
+            }
+
+            const geojsonData = await response.json();
+
+            const geojsonLayer = L.geoJSON(geojsonData, {
+                filter: function(feature) {
+                    return feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon';
+                },
+
+                style: function (feature) {
+                    const cityName = feature.properties.name;
+
+                    if (cityName && servicedCities.includes(cityName)) {
+                        return { color: "#ffffff", weight: 2, fillColor: "#dd6b20", fillOpacity: 0.8 };
+                    }
+
+                    return { color: "#ffffff", weight: 1, fillColor: "#e2e8f0", fillOpacity: 0.6 };
+                },
+                onEachFeature: function (feature, layer) {
+                    const cityName = feature.properties?.name;
+
+                    if (cityName) {
+                        const isServiced = servicedCities.includes(cityName);
+
+                        layer.bindTooltip(cityName, {
+                            direction: "top",
+                            className: isServiced ? "tooltip-serviced" : "tooltip-unserviced"
+                        });
+
+                        layer.on({
+                            mouseover: function(e) {
+                                const l = e.target;
+                                l.setStyle({ weight: 3, color: isServiced ? '#c05621' : '#94a3b8' });
+                                l.bringToFront();
+                            },
+                            mouseout: function(e) {
+                                geojsonLayer.resetStyle(e.target);
+                            }
+                        });
+                    }
+                }
+            }).addTo(map);
+
+            geojsonLayer.addTo(map);
+
+            map.fitBounds(geojsonLayer.getBounds());
+
+            const currentZoom = map.getZoom();
+            const initialBounds = geojsonLayer.getBounds();
+
+            map.setMaxBounds(initialBounds);
+
+            map.setMinZoom(currentZoom);
+            map.setMaxZoom(currentZoom + 3);
+
+        } catch (error) {
+            console.error("Map error:", error);
+            map.setView([47.45, 19.53], 10);
+            map.setMinZoom(9);
+        }
+    });
+</script>
+
+<style is:global>
+    .map-container {
+        height: 100%;
+        min-height: 400px;
+        width: 100%;
+        border-radius: 8px;
+        background-color: #f8fafc !important;
+        border: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-sm);
+        z-index: 1;
+    }
+
+    .tooltip-serviced {
+        background-color: #dd6b20 !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 4px !important;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 4px 8px !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+    .tooltip-serviced::before {
+        border-top-color: #dd6b20 !important;
+    }
+
+    .tooltip-unserviced {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        color: #64748b !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 4px !important;
+        font-weight: 500;
+        font-size: 0.85rem;
+        padding: 4px 8px !important;
+    }
+    .tooltip-unserviced::before {
+        border-top-color: #cbd5e1 !important;
+    }
+</style>

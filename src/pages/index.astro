@@ -1,0 +1,546 @@
+---
+import Layout from '../layouts/layout.astro';
+import { useTranslations } from '../i18n/utils';
+import InteractiveMap from '../components/interactiveMap.astro';
+
+const t = useTranslations();
+
+const brands = ["Vaillant", "Saunier Duval", "Bosch", "Ariston", "Baxi", "Fég", "Westen"];
+
+const locations = {
+    pestCounty: [
+        "Sülysáp", "Gyömrő", "Mende", "Maglód", "Pusztaszentistván",
+        "Kóka", "Úri", "Tápiószecső", "Gyál", "Vecsés", "Pécel", "Ecser", "Üllő", "Nagykáta",
+        "Szentmártonkáta", "Tóalmás", "Tápióság", "Gomba", "Péteri", "Monor", "Isaszeg", "Dány", "Zsámbok",
+        "Tápióbicske", "Tápiószentmárton", "Bénye", "Káva", "Pánd",
+    ]
+};
+
+const galleryImages = [
+    "/images/work-1.jpg",
+    "/images/work-2.jpg",
+    "/images/work-3.jpg",
+    "/images/work-4.jpg"
+];
+---
+
+<Layout title={`${t('nav.home')} | ${t('site.title')}`}>
+
+    <section class="hero container">
+        <div class="hero-content fade-in-up">
+            <span class="badge">{t('hero.badge')}</span>
+            <h1>{t('hero.title.1')} <br> <span class="text-primary">{t('hero.title.2')}</span></h1>
+            <p>{t('hero.subtitle')}</p>
+
+            <div class="appliance-tags">
+                <span>✓ {t('hero.tags.1')}</span>
+                <span>✓ {t('hero.tags.2')}</span>
+                <span>✓ {t('hero.tags.3')}</span>
+                <span>✓ {t('hero.tags.4')}</span>
+            </div>
+
+            <div class="buttons">
+                <a href="/contact" class="btn-primary">{t('hero.cta.primary')}</a>
+                <a href="/services" class="btn-outline">{t('hero.cta.secondary')}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-banner container fade-in-up">
+        <div class="promo-content">
+            <div class="promo-text">
+                <span class="promo-badge">{t('promo.badge')}</span>
+                <h2>{t('promo.title')}</h2>
+                <p>{t('promo.subtitle')}</p>
+                <ul>
+                    <li>✓ {t('promo.list.1')}</li>
+                    <li>✓ {t('promo.list.2')}</li>
+                    <li>✓ {t('promo.list.3')}</li>
+                </ul>
+            </div>
+            <div class="promo-action">
+                <a href="tel:+36309440624" class="btn-primary promo-btn">📞 {t('promo.cta')}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-banner fade-in-up">
+        <div class="container trust-grid">
+            <div class="trust-item">
+                <span class="trust-icon">🏅</span>
+                <div>
+                    <strong>{t('trust.1.title')}</strong>
+                    <p>{t('trust.1.text')}</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🛡️</span>
+                <div>
+                    <strong>{t('trust.2.title')}</strong>
+                    <p>{t('trust.2.text')}</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🧹</span>
+                <div>
+                    <strong>{t('trust.3.title')}</strong>
+                    <p>{t('trust.3.text')}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brands-section container fade-in-up">
+        <div class="section-header">
+            <h2>{t('marquee.brands.title')}</h2>
+            <p>{t('marquee.brands.subtitle')}</p> </div>
+
+        <div class="brand-grid">
+            {brands.map(brand => (
+                    <div class="brand-card">
+                        <span class="check-icon">✓</span>
+                        <span class="brand-name">{brand}</span>
+                    </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="features container fade-in-up">
+        <div class="section-header">
+            <h2>{t('feature.title')}</h2>
+            <p>{t('feature.subtitle')}</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🛠️</div>
+                <h3>{t('feature.1.title')}</h3>
+                <p>{t('feature.1.text')}</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔥</div>
+                <h3>{t('feature.2.title')}</h3>
+                <p>{t('feature.2.text')}</p>
+            </div>
+            <div class="card">
+                <div class="icon">⏱️</div>
+                <h3>{t('feature.3.title')}</h3>
+                <p>{t('feature.3.text')}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-area container fade-in-up">
+        <div class="section-header">
+            <h2>{t('map.title')}</h2>
+            <p>{t('map.subtitle')}</p>
+        </div>
+
+        <div class="map-layout">
+            <div class="map-container">
+                <InteractiveMap servicedCities={locations.pestCounty} />
+            </div>
+
+            <div class="locations-box">
+                <h3>📍{t('map.list.title')}</h3>
+
+                <div class="location-group">
+                    <ul class="city-list">
+                        {locations.pestCounty.map(city => (
+                                <li>{city}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div class="call-out-note">
+                    <p>{t('map.callout')}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery container fade-in-up">
+        <h2>{t('gallery.title')}</h2>
+        <div class="slider-container">
+            <div class="slider">
+                {galleryImages.map((img, index) => (
+                        <div class="slide">
+                            <div class="placeholder-img">Minta Kép {index + 1}</div>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style lang="scss">
+  .hero {
+    padding: 4rem 1.5rem 4rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .badge {
+      display: inline-block;
+      background: var(--gray-200);
+      color: var(--primary-dark);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
+    .text-primary { color: var(--primary); }
+    p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+    .appliance-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+
+      span {
+        background: rgba(var(--primary-rgb), 0.1);
+        color: var(--primary-dark);
+        padding: 0.4rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid rgba(var(--primary-rgb), 0.2);
+      }
+    }
+
+    .buttons { display: flex; gap: 1rem; justify-content: center; }
+
+    @media(max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .buttons { flex-direction: column; }
+    }
+  }
+
+  .promo-banner {
+    margin-bottom: 3rem;
+
+    .promo-content {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--white);
+      border-radius: 12px;
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: var(--shadow-md);
+
+      @media (max-width: 800px) {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+      }
+    }
+
+    .promo-badge {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+        font-weight: 600;
+        color: var(--white);
+      }
+    }
+
+    .promo-action {
+      flex-shrink: 0;
+    }
+
+    .promo-btn {
+      background: var(--white);
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s, background 0.3s;
+      display: inline-block;
+      text-decoration: none;
+
+      &:hover {
+        transform: translateY(-3px);
+        background: var(--gray-100);
+      }
+    }
+  }
+
+  .trust-banner {
+    background-color: var(--dark);
+    color: var(--white);
+    padding: 2.5rem 1.5rem;
+    margin-bottom: 3rem;
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .trust-icon {
+        font-size: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.8rem;
+        border-radius: 12px;
+      }
+
+      strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        color: var(--white);
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--gray-200);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .features {
+    padding: 5rem 1.5rem;
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+      h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+      p { color: var(--text-muted); margin: 0; }
+    }
+  }
+
+  .brands-section {
+    padding: 2rem 1.5rem 5rem;
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      h2 { margin-bottom: 0.5rem; }
+      p { color: var(--text-muted); font-size: 1.1rem; }
+    }
+
+    .brand-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .brand-card {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-weight: 600;
+      color: var(--dark);
+      font-size: 1.1rem;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary);
+      }
+
+      .check-icon {
+        background: rgba(var(--primary-rgb), 0.1);
+        color: var(--primary);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .service-area {
+    padding: 5rem 1.5rem;
+
+    .section-header { text-align: center; margin-bottom: 3rem; }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 3rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+
+      @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    .map-container {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+
+      iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .locations-box {
+      padding: 2.5rem;
+
+      h3 { margin-top: 0; margin-bottom: 1.5rem; font-size: 1.4rem;}
+
+      .location-group {
+        margin-bottom: 1.5rem;
+
+        strong { font-size: 1.1rem; color: var(--dark); }
+        .pin { margin-right: 0.5rem; }
+      }
+
+      .city-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 0 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+
+        li {
+          color: var(--text-main);
+          font-size: 0.95rem;
+          position: relative;
+
+          &::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: -1rem;
+          }
+        }
+      }
+
+      .call-out-note {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: var(--gray-100);
+        border-left: 4px solid var(--accent);
+        border-radius: 4px;
+        p { margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--text-main);}
+      }
+    }
+  }
+
+  .gallery {
+    padding: 5rem 1.5rem;
+    h2 { text-align: center; margin-bottom: 2rem; }
+
+    .slider-container {
+      width: 100%;
+      overflow: hidden;
+    }
+    .slider {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+
+      &::-webkit-scrollbar { display: none; }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .slide {
+      flex: 0 0 80%;
+      max-width: 600px;
+      scroll-snap-align: center;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .placeholder-img {
+        width: 100%;
+        height: 350px;
+        background-color: var(--gray-200);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+      }
+
+      img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
+</style>
