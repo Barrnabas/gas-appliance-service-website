@@ -11,27 +11,41 @@ const t = useTranslations();
 
         <div class="legal-section">
             <h2>1. Impresszum</h2>
-            <p>A weboldal üzemeltetőjének adatai:</p>
+            <p>A weboldal üzemeltetőjének és a szolgáltatás nyújtójának adatai:</p>
             <ul>
-                <li><strong>Név:</strong> Laczkó Tibor (Egyéni vállalkozó)</li>
-                <li><strong>Székhely:</strong> 2241 Sülysáp, Fő utca ...</li>
-                <li><strong>Adószám:</strong> [Adószám]</li>
-                <li><strong>Nyilvántartási szám:</strong> [Nyilvántartási szám beírása]</li>
-                <li><strong>Kamarai tagság:</strong> [Pl. Pest Megyei Kereskedelmi és Iparkamara]</li>
+                <li><strong>Név:</strong> Laczkó Tibor e.v.</li>
+                <li><strong>Székhely:</strong> 2241 Sülysáp, Dózsa György utca 145</li>
+                <li><strong>Adószám:</strong> 62779962-1-33</li>
+                <li><strong>Nyilvántartási szám: 2648118</strong> </li>
                 <li><strong>E-mail:</strong> {t('contact.info.email.address')}</li>
                 <li><strong>Telefon:</strong> {t('contact.booking.btn').replace('Hívás: ', '')}</li>
+                <li><strong>Kamarai tagság:</strong> Pest Megyei Kereskedelmi és Iparkamara</li>
             </ul>
-            <p><strong>Tárhelyszolgáltató:</strong> [Pl. Netlify / Vercel / GitHub adatai]</p>
+            <h3>Tárhelyszolgáltató adatai</h3>
+            <p>A weboldal statikus tárhelyét a GitHub Pages biztosítja:</p>
+            <ul>
+                <li><strong>Név:</strong> GitHub, Inc.</li>
+                <li><strong>Székhely:</strong> 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA</li>
+                <li><strong>Kapcsolat:</strong> support@github.com</li>
+            </ul>
         </div>
 
         <div class="legal-section">
-            <h2>2. Adatkezelési Tájékoztató</h2>
-            <p>Ez a tájékoztató a weboldal látogatói számára készült a GDPR előírásainak megfelelően.</p>
-            <h3>Adatkezelés célja</h3>
-            <p>A weboldalon nem található kapcsolatfelvételi űrlap, így közvetlen adatgyűjtés nem történik. Amennyiben Ön telefonon vagy e-mailben keres meg, adatait (név, cím, telefonszám) kizárólag a kért szolgáltatás elvégzéséhez és a törvényben előírt számlázási kötelezettség teljesítéséhez használom fel.</p>
+            <h2>2. Adatkezelési tájékoztató</h2>
+            <p>Ez a tájékoztató a GDPR (EU 2016/679) előírásainak megfelelően tájékoztatja a látogatókat.</p>
 
-            <h3>Sütik (Cookies) és Harmadik fél</h3>
-            <p>A weboldal a térkép megjelenítéséhez (Leaflet) és betűtípusokhoz technikai jellegű szolgáltatásokat vesz igénybe, amelyek során névtelen adatok (IP-cím) kerülhetnek továbbításra a szolgáltatónak. Saját marketing célú adatgyűjtést vagy követést nem végzek.</p>
+            <h3>Adatkezelés célja és jogalapja</h3>
+            <p>A weboldalon közvetlen adatgyűjtés (pl. hírlevél, regisztráció) nem történik. Az adatkezelés jogalapja az Önnel való kapcsolattartás és a kért szolgáltatás elvégzése.</p>
+
+            <h3>Sütik (Cookies) és technikai adatok</h3>
+            <p>A weboldal üzemeltetése során a GitHub szerverei automatikusan naplózhatják a látogató IP-címét és böngésző adatait biztonsági és naplózási célokból. Saját marketing célú követést nem végzek.</p>
+
+            <h3>Jogorvoslat</h3>
+            <p>Ön jogosult tájékoztatást kérni adatai kezeléséről, vagy kérheti azok törlését. Jogai megsértése esetén fordulhat a Nemzeti Adatvédelmi és Információszabadság Hatósághoz (NAIH):</p>
+            <ul>
+                <li><strong>Cím:</strong> 1055 Budapest, Falk Miksa utca 9-11.</li>
+                <li><strong>Web:</strong> www.naih.hu</li>
+            </ul>
         </div>
     </section>
 </Layout>
@@ -57,6 +71,7 @@ const t = useTranslations();
     h3 {
       margin-top: 1.5rem;
       font-size: 1.2rem;
+      font-weight: 600;
     }
 
     .legal-section {
@@ -67,10 +82,15 @@ const t = useTranslations();
       ul {
         list-style: none;
         padding: 0;
+        margin-top: 0.5rem;
 
         li {
           margin-bottom: 0.5rem;
           padding-left: 0;
+
+          strong {
+            color: var(--text-dark);
+          }
         }
       }
     }
