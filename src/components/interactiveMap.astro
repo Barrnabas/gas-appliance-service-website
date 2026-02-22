@@ -1,52 +1,58 @@
 ---
+import 'leaflet/dist/leaflet.css';
+
 const { servicedCities = [] } = Astro.props;
 ---
 
 <div id="service-map" class="map-container"></div>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    import L from 'leaflet';
 
-<script define:vars={{ servicedCities }}>
     document.addEventListener('astro:page-load', async () => {
-        const container = L.DomUtil.get('service-map');
-        if(container != null){
-            container._leaflet_id = null;
+        const mapContainer = document.getElementById('service-map');
+        const dataContainer = document.getElementById('service-map-data');
+
+        if (!mapContainer || !dataContainer) return;
+
+        const servicedCities = JSON.parse(dataContainer.dataset.cities || '[]');
+
+        if ((mapContainer as any)._leaflet_id) {
+            (mapContainer as any)._leaflet_id = null;
         }
 
         const map = L.map('service-map', {
             zoomControl: true,
-            attributionControl: false,
-            minZoom: 9,
-            maxBoundViscosity: 1.0,
+            attributionControl: false
         });
 
         try {
             const response = await fetch('/pest_borders.geojson');
 
             if (!response.ok) {
-                throw new Error(`File not found! Server returned status: ${response.status}`);
+                console.error(`Error during loding the GeoJSON: ${response.status}`);
+                map.setView([47.45, 19.53], 10);
+                return;
             }
 
             const geojsonData = await response.json();
 
             const geojsonLayer = L.geoJSON(geojsonData, {
-                filter: function(feature) {
-                    return feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon';
+                filter: (feature) =>
+                    feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon',
+
+                style: (feature) => {
+                    const cityName = feature?.properties?.name;
+                    const isServiced = cityName && servicedCities.includes(cityName);
+                    return {
+                        color: "#ffffff",
+                        weight: isServiced ? 2 : 1,
+                        fillColor: isServiced ? "#dd6b20" : "#e2e8f0",
+                        fillOpacity: isServiced ? 0.8 : 0.6
+                    };
                 },
-
-                style: function (feature) {
-                    const cityName = feature.properties.name;
-
-                    if (cityName && servicedCities.includes(cityName)) {
-                        return { color: "#ffffff", weight: 2, fillColor: "#dd6b20", fillOpacity: 0.8 };
-                    }
-
-                    return { color: "#ffffff", weight: 1, fillColor: "#e2e8f0", fillOpacity: 0.6 };
-                },
-                onEachFeature: function (feature, layer) {
-                    const cityName = feature.properties?.name;
-
+                onEachFeature: (feature, layer) => {
+                    const cityName = feature?.properties?.name;
                     if (cityName) {
                         const isServiced = servicedCities.includes(cityName);
 
@@ -56,35 +62,29 @@ const { servicedCities = [] } = Astro.props;
                         });
 
                         layer.on({
-                            mouseover: function(e) {
+                            mouseover: (e) => {
                                 const l = e.target;
-                                l.setStyle({ weight: 3, color: isServiced ? '#c05621' : '#94a3b8' });
+                                l.setStyle({
+                                    weight: 3,
+                                    color: isServiced ? '#c05621' : '#94a3b8'
+                                });
                                 l.bringToFront();
                             },
-                            mouseout: function(e) {
-                                geojsonLayer.resetStyle(e.target);
-                            }
+                            mouseout: (e) => geojsonLayer.resetStyle(e.target)
                         });
                     }
                 }
             }).addTo(map);
 
-            geojsonLayer.addTo(map);
-
             map.fitBounds(geojsonLayer.getBounds());
-
             const currentZoom = map.getZoom();
-            const initialBounds = geojsonLayer.getBounds();
-
-            map.setMaxBounds(initialBounds);
-
+            map.setMaxBounds(geojsonLayer.getBounds());
             map.setMinZoom(currentZoom);
             map.setMaxZoom(currentZoom + 3);
 
         } catch (error) {
             console.error("Map error:", error);
             map.setView([47.45, 19.53], 10);
-            map.setMinZoom(9);
         }
     });
 </script>
@@ -128,3 +128,9 @@ const { servicedCities = [] } = Astro.props;
         border-top-color: #cbd5e1 !important;
     }
 </style>
+
+<div
+        id="service-map-data"
+        style="display:none"
+        data-cities={JSON.stringify(servicedCities)}
+></div>

@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "astro": "^5.17.1",
+    "leaflet": "^1.9.4",
     "sass": "^1.97.3"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.21"
   }
 }
