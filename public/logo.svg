@@ -1,0 +1,25 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+    <defs>
+        <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#bf360c" />
+            <stop offset="100%" stop-color="#e65100" />
+        </linearGradient>
+
+        <mask id="wrenchMask">
+            <rect width="512" height="512" fill="white" />
+
+            <rect x="240" y="310" width="32" height="130" rx="8" fill="black" />
+            <circle cx="256" cy="300" r="42" fill="black" />
+
+            <rect x="238" y="240" width="36" height="65" rx="6" fill="white" />
+        </mask>
+    </defs>
+
+    <circle cx="256" cy="256" r="240" fill="#1c1917" />
+
+    <g mask="url(#wrenchMask)">
+        <path d="M256,72 c0,0 -96,120 -96,208 c0,53 43,96 96,96 c53,0 96,-43 96,-96 C352,192 256,72 256,72 Z" fill="url(#flameGrad)" />
+
+        <path d="M256,180 c0,0 -48,70 -48,124 c0,26 21,48 48,48 c26,0 48,-21 48,-48 C304,250 256,180 256,180 Z" fill="#ffffff" opacity="0.9" />
+    </g>
+</svg>
