@@ -30,7 +30,9 @@ const { servicedCities = [] } = Astro.props;
             const response = await fetch('/pest_borders.geojson');
 
             if (!response.ok) {
-                console.error(`Error during loding the GeoJSON: ${response.status}`);
+                if (import.meta.env.DEV) {
+                    console.error(`Error during loding the GeoJSON: ${response.status}`);
+                }
                 map.setView([47.45, 19.53], 10);
                 return;
             }
@@ -83,7 +85,9 @@ const { servicedCities = [] } = Astro.props;
             map.setMaxZoom(currentZoom + 3);
 
         } catch (error) {
-            console.error("Map error:", error);
+            if (import.meta.env.DEV) {
+                console.error("Map error:", error);
+            }
             map.setView([47.45, 19.53], 10);
         }
     });
