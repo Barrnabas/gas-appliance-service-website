@@ -1,0 +1,23 @@
+
+> nutrition-marketing@0.0.1 dev
+> astro dev --host
+
+▶ Astro collects anonymous usage data.
+  This information helps us improve Astro.
+  Run "astro telemetry disable" to opt-out.
+  https://astro.build/telemetry
+
+06:27:04 [types] Generated 1ms
+06:27:04 [content] Syncing content
+06:27:04 [content] Synced content
+
+ astro  v5.17.2 ready in 234 ms
+
+┃ Local    http://localhost:4321/gas-appliance-service-website
+┃ Network  http://192.168.0.2:4321/gas-appliance-service-website
+
+06:27:04 watching for file changes...
+06:28:02 [200] / 73ms
+06:28:03 [ERROR] [router] Request URLs for public/ assets must also include your base. "/gas-appliance-service-website/pest_borders.geojson" expected, but received "/pest_borders.geojson".
+06:28:19 [200] / 9ms
+06:28:19 [ERROR] [router] Request URLs for public/ assets must also include your base. "/gas-appliance-service-website/pest_borders.geojson" expected, but received "/pest_borders.geojson".
