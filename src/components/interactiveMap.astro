@@ -9,6 +9,8 @@ const { servicedCities = [] } = Astro.props;
 <script>
     import L from 'leaflet';
 
+    let cachedGeoJson = null;
+
     document.addEventListener('astro:page-load', async () => {
         const mapContainer = document.getElementById('service-map');
         const dataContainer = document.getElementById('service-map-data');
@@ -27,15 +29,19 @@ const { servicedCities = [] } = Astro.props;
         });
 
         try {
-            const response = await fetch('/pest_borders.geojson');
+            if (!cachedGeoJson) {
+                const response = await fetch('/pest_borders.geojson');
 
-            if (!response.ok) {
-                console.error(`Error during loding the GeoJSON: ${response.status}`);
-                map.setView([47.45, 19.53], 10);
-                return;
+                if (!response.ok) {
+                    console.error(`Error during loding the GeoJSON: ${response.status}`);
+                    map.setView([47.45, 19.53], 10);
+                    return;
+                }
+
+                cachedGeoJson = await response.json();
             }
 
-            const geojsonData = await response.json();
+            const geojsonData = cachedGeoJson;
 
             const geojsonLayer = L.geoJSON(geojsonData, {
                 filter: (feature) =>
