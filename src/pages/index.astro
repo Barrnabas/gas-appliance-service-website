@@ -16,12 +16,6 @@ const locations = {
     ]
 };
 
-const galleryImages = [
-    "/images/work-1.jpg",
-    "/images/work-2.jpg",
-    "/images/work-3.jpg",
-    "/images/work-4.jpg"
-];
 ---
 
 <Layout title={`${t('nav.home')} | ${t('site.title')}`}>
@@ -162,7 +156,7 @@ const galleryImages = [
         <h2>{t('gallery.title')}</h2>
         <div class="slider-container">
             <div class="slider">
-                {galleryImages.map((img, index) => (
+                {Array.from({ length: 4 }).map((_, index) => (
                         <div class="slide">
                             <div class="placeholder-img">Minta Kép {index + 1}</div>
                         </div>
