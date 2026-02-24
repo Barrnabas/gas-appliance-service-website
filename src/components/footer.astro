@@ -15,8 +15,8 @@ const year = new Date().getFullYear();
         </div>
 
         <div class="contact-info">
-            <p><strong>Telefon:</strong> <a href="tel:+36309440624">+36 30 944 0624</a></p>
-            <p><strong>Email:</strong> <a href="mailto:laczkogazszerviz@gmail.com">laczkogazszerviz@gmail.com</a></p>
+            <p><strong>Telefon:</strong> <a href={`tel:${t('contact.phone')}`}>{t('contact.phone.display')}</a></p>
+            <p><strong>Email:</strong> <a href={`mailto:${t('contact.info.email.address')}`}>{t('contact.info.email.address')}</a></p>
         </div>
     </div>
 

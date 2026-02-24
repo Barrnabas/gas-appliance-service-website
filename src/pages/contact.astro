@@ -19,7 +19,9 @@ const t = useTranslations();
                 <h3>{t('contact.booking.title')}</h3>
                 <p>{t('contact.booking.subtitle')}</p>
 
-                <a href="tel:+36301234567" class="btn-primary phone-btn">{t('contact.booking.btn')}</a>
+                <a href={`tel:${t('contact.phone')}`} class="btn-primary phone-btn">
+                    {t('contact.booking.btn')} {t('contact.phone.display')}
+                </a>
 
                 <p class="availability">
                     {t('contact.booking.availability.main')}<br>
