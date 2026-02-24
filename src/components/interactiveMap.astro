@@ -9,6 +9,10 @@ const { servicedCities = [] } = Astro.props;
 <script>
     import L from 'leaflet';
 
+    interface LeafletMapElement extends HTMLElement {
+        _leaflet_id?: number | null;
+    }
+
     document.addEventListener('astro:page-load', async () => {
         const mapContainer = document.getElementById('service-map');
         const dataContainer = document.getElementById('service-map-data');
@@ -17,8 +21,8 @@ const { servicedCities = [] } = Astro.props;
 
         const servicedCities = JSON.parse(dataContainer.dataset.cities || '[]');
 
-        if ((mapContainer as any)._leaflet_id) {
-            (mapContainer as any)._leaflet_id = null;
+        if ((mapContainer as LeafletMapElement)._leaflet_id) {
+            (mapContainer as LeafletMapElement)._leaflet_id = null;
         }
 
         const map = L.map('service-map', {
