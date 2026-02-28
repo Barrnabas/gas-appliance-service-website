@@ -11,13 +11,17 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@lucide/astro": "^0.575.0",
     "astro": "^5.17.1",
+    "astro-icon": "^1.1.5",
     "jsdom": "^28.1.0",
     "leaflet": "^1.9.4",
     "sass": "^1.97.3",
     "vitest": "^4.0.18"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.95",
     "@types/leaflet": "^1.9.21"
   }
 }

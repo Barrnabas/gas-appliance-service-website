@@ -1,6 +1,4 @@
 ﻿import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import L from 'leaflet';
-import {initMap} from "../../src/lib/mapInit.ts";
 
 vi.mock('leaflet', () => {
     const mapMock = {
@@ -34,21 +32,39 @@ describe('initMap', () => {
     const mapId = 'service-map';
     const dataId = 'service-map-data';
 
-    beforeEach(() => {
+    // Import is done dynamically per-test so vi.resetModules() clears cachedGeoJson
+    // between tests, preventing the cache from leaking across test cases.
+    let initMap: (mapContainerId: string, dataContainerId: string) => Promise<void>;
+    let L: typeof import('leaflet');
+
+    beforeEach(async () => {
+        vi.resetModules();
+
+        // Re-import after resetModules so cachedGeoJson starts as null each test.
+        const mapModule = await import('../../src/lib/mapInit.ts');
+        initMap = mapModule.initMap;
+        L = (await import('leaflet')).default as unknown as typeof import('leaflet');
+
+        // Clear mock call counts AFTER re-importing so counts start at 0 per test.
+        vi.clearAllMocks();
+
         document.body.innerHTML = `
             <div id="${mapId}"></div>
             <div id="${dataId}" data-cities='["Budapest"]'></div>
         `;
-        vi.clearAllMocks();
 
         vi.stubGlobal('fetch', vi.fn());
 
-        vi.spyOn(console, 'error').mockImplementation(() => {});
+        // Stub DEV = true so DEV-only console.error branches are reachable in tests.
+        vi.stubEnv('DEV', true);
+
+        vi.spyOn(console, 'error').mockImplementation(() => { });
     });
 
     afterEach(() => {
         vi.restoreAllMocks();
         vi.unstubAllGlobals();
+        vi.unstubAllEnvs();
     });
 
     it('should initialize map and load geojson successfully', async () => {
@@ -61,11 +77,11 @@ describe('initMap', () => {
 
         await initMap(mapId, dataId);
 
-        expect(L.map).toHaveBeenCalledWith(mapId, expect.any(Object));
+        expect((L as any).map).toHaveBeenCalledWith(mapId, expect.any(Object));
         expect(fetch).toHaveBeenCalledWith('/pest_borders.geojson');
-        expect(L.geoJSON).toHaveBeenCalledWith(mockGeoJSON, expect.any(Object));
+        expect((L as any).geoJSON).toHaveBeenCalledWith(mockGeoJSON, expect.any(Object));
 
-        const mapInstance = (L.map as any).mock.results[0].value;
+        const mapInstance = ((L as any).map as any).mock.results[0].value;
         expect(mapInstance.fitBounds).toHaveBeenCalled();
         expect(mapInstance.setMaxBounds).toHaveBeenCalled();
     });
@@ -77,7 +93,7 @@ describe('initMap', () => {
 
         expect(console.error).toHaveBeenCalledWith('Map error:', expect.any(Error));
 
-        const mapInstance = (L.map as any).mock.results[0].value;
+        const mapInstance = ((L as any).map as any).mock.results[0].value;
         expect(mapInstance.setView).toHaveBeenCalledWith([47.45, 19.53], 10);
     });
 
@@ -91,14 +107,14 @@ describe('initMap', () => {
 
         expect(console.error).toHaveBeenCalledWith('Error during loding the GeoJSON: 404');
 
-        const mapInstance = (L.map as any).mock.results[0].value;
+        const mapInstance = ((L as any).map as any).mock.results[0].value;
         expect(mapInstance.setView).toHaveBeenCalledWith([47.45, 19.53], 10);
     });
 
     it('should not initialize if elements are missing', async () => {
         document.body.innerHTML = '';
         await initMap(mapId, dataId);
-        expect(L.map).not.toHaveBeenCalled();
+        expect((L as any).map).not.toHaveBeenCalled();
     });
 
     it('should reset leaflet_id if present', async () => {
@@ -113,6 +129,6 @@ describe('initMap', () => {
         await initMap(mapId, dataId);
 
         expect((mapEl as any)._leaflet_id).toBeNull();
-        expect(L.map).toHaveBeenCalled();
+        expect((L as any).map).toHaveBeenCalled();
     });
 });

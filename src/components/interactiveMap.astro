@@ -7,12 +7,33 @@ const { servicedCities = [] } = Astro.props;
 <div id="service-map" class="map-container"></div>
 
 <script>
-    import { initMap } from '../lib/mapInit.ts';
+    let mapObserver: IntersectionObserver | null = null;
 
-    document.addEventListener('astro:page-load', async () => {
-        await initMap('service-map', 'service-map-data');
+    function setupMapObserver() {
+        mapObserver?.disconnect();
+        mapObserver = null;
+
+        const mapContainer = document.getElementById('service-map');
+        if (!mapContainer) return;
+
+        mapObserver = new IntersectionObserver(async (entries, obs) => {
+            if (entries[0].isIntersecting) {
+                obs.disconnect();
+                mapObserver = null;
+                const { initMap } = await import('../lib/mapInit.ts');
+                await initMap('service-map', 'service-map-data');
+            }
+        }, { rootMargin: '200px' });
+
+        mapObserver.observe(mapContainer);
+    }
+
+    document.addEventListener('astro:before-preparation', () => {
+        mapObserver?.disconnect();
+        mapObserver = null;
     });
 
+    document.addEventListener('astro:page-load', setupMapObserver);
 </script>
 
 <style is:global>
@@ -22,7 +43,7 @@ const { servicedCities = [] } = Astro.props;
         width: 100%;
         border-radius: 8px;
         background-color: #f8fafc !important;
-        border: 1px solid var(--gray-200);
+        border: 1px solid var(--slate-200);
         box-shadow: var(--shadow-sm);
         z-index: 1;
     }
@@ -52,6 +73,11 @@ const { servicedCities = [] } = Astro.props;
     }
     .tooltip-unserviced::before {
         border-top-color: #cbd5e1 !important;
+    }
+
+    .map-polygon-non-interactive {
+        cursor: default !important;
+        outline: none;
     }
 </style>
 

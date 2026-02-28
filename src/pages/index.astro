@@ -2,6 +2,7 @@
 import Layout from '../layouts/layout.astro';
 import { useTranslations } from '../i18n/utils';
 import InteractiveMap from '../components/interactiveMap.astro';
+import { Icon } from 'astro-icon/components';
 
 const t = useTranslations();
 
@@ -17,8 +18,6 @@ const locations = {
 };
 
 const galleryImages = [
-    "/images/work-1.jpg",
-    "/images/work-2.jpg",
     "/images/work-3.jpg",
     "/images/work-4.jpg"
 ];
@@ -26,146 +25,220 @@ const galleryImages = [
 
 <Layout title={`${t('nav.home')} | ${t('site.title')}`}>
 
-    <section class="hero container">
-        <div class="hero-content fade-in-up">
-            <span class="badge">{t('hero.badge')}</span>
-            <h1>{t('hero.title.1')} <br> <span class="text-primary">{t('hero.title.2')}</span></h1>
-            <p>{t('hero.subtitle')}</p>
-
-            <div class="appliance-tags">
-                <span>✓ {t('hero.tags.1')}</span>
-                <span>✓ {t('hero.tags.2')}</span>
-                <span>✓ {t('hero.tags.3')}</span>
-                <span>✓ {t('hero.tags.4')}</span>
-            </div>
-
-            <div class="buttons">
-                <a href="/contact" class="btn-primary">{t('hero.cta.primary')}</a>
-                <a href="/services" class="btn-outline">{t('hero.cta.secondary')}</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="promo-banner container fade-in-up">
-        <div class="promo-content">
-            <div class="promo-text">
-                <span class="promo-badge">{t('promo.badge')}</span>
-                <h2>{t('promo.title')}</h2>
-                <p>{t('promo.subtitle')}</p>
-                <ul>
-                    <li>✓ {t('promo.list.1')}</li>
-                    <li>✓ {t('promo.list.2')}</li>
-                    <li>✓ {t('promo.list.3')}</li>
-                </ul>
-            </div>
-            <div class="promo-action">
-                <a href={`tel:${t('contact.phone')}`} class="btn-primary promo-btn">📞 {t('promo.cta')}</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="trust-banner fade-in-up">
-        <div class="container trust-grid">
-            <div class="trust-item">
-                <span class="trust-icon">🏅</span>
-                <div>
-                    <strong>{t('trust.1.title')}</strong>
-                    <p>{t('trust.1.text')}</p>
+    <header class="hero-section hero-pattern fade-in-up">
+        <div class="hero-gradient-overlay"></div>
+        <div class="container hero-container relative z-10">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <Icon name="lucide:badge-check" class="badge-icon" />
+                    {t('hero.badge')}
                 </div>
-            </div>
-            <div class="trust-item">
-                <span class="trust-icon">🛡️</span>
-                <div>
-                    <strong>{t('trust.2.title')}</strong>
-                    <p>{t('trust.2.text')}</p>
+                
+                <h1 class="hero-title">
+                    {t('hero.title.1')} <br/>
+                    <span class="text-primary">{t('hero.title.2')}</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    {t('hero.subtitle')}
+                </p>
+                
+                <div class="hero-tags">
+                    <span class="hero-tag"><Icon name="lucide:check-circle" class="tag-icon" /> {t('hero.tags.1')}</span>
+                    <span class="hero-tag"><Icon name="lucide:check-circle" class="tag-icon" /> {t('hero.tags.2')}</span>
+                    <span class="hero-tag"><Icon name="lucide:check-circle" class="tag-icon" /> {t('hero.tags.3')}</span>
+                    <span class="hero-tag"><Icon name="lucide:check-circle" class="tag-icon" /> {t('hero.tags.4')}</span>
                 </div>
-            </div>
-            <div class="trust-item">
-                <span class="trust-icon">🧹</span>
-                <div>
-                    <strong>{t('trust.3.title')}</strong>
-                    <p>{t('trust.3.text')}</p>
+                
+                <div class="hero-actions">
+                    <a class="btn-primary hero-btn-primary" href="/contact">
+                        {t('hero.cta.primary')}
+                    </a>
+                    <a class="btn-outline hero-btn-outline" href="/services">
+                        {t('hero.cta.secondary')}
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section class="brands-section container fade-in-up">
-        <div class="section-header">
-            <h2>{t('marquee.brands.title')}</h2>
-            <p>{t('marquee.brands.subtitle')}</p> </div>
-
-        <div class="brand-grid">
-            {brands.map(brand => (
-                    <div class="brand-card">
-                        <span class="check-icon">✓</span>
-                        <span class="brand-name">{brand}</span>
-                    </div>
-            ))}
-        </div>
-    </section>
-
-    <section class="features container fade-in-up">
-        <div class="section-header">
-            <h2>{t('feature.title')}</h2>
-            <p>{t('feature.subtitle')}</p>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <div class="icon">🛠️</div>
-                <h3>{t('feature.1.title')}</h3>
-                <p>{t('feature.1.text')}</p>
-            </div>
-            <div class="card">
-                <div class="icon">🔥</div>
-                <h3>{t('feature.2.title')}</h3>
-                <p>{t('feature.2.text')}</p>
-            </div>
-            <div class="card">
-                <div class="icon">⏱️</div>
-                <h3>{t('feature.3.title')}</h3>
-                <p>{t('feature.3.text')}</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="service-area container fade-in-up">
-        <div class="section-header">
-            <h2>{t('map.title')}</h2>
-            <p>{t('map.subtitle')}</p>
-        </div>
-
-        <div class="map-layout">
-            <div class="map-container">
-                <InteractiveMap servicedCities={locations.pestCounty} />
-            </div>
-
-            <div class="locations-box">
-                <h3>📍{t('map.list.title')}</h3>
-
-                <div class="location-group">
-                    <ul class="city-list">
-                        {locations.pestCounty.map(city => (
-                                <li>{city}</li>
-                        ))}
+    <section class="trust-banner container fade-in-up">
+        <div class="trust-card">
+            <div class="trust-glow-1"></div>
+            <div class="trust-glow-2"></div>
+            
+            <div class="trust-grid relative z-10">
+                <div class="trust-text-content">
+                    <span class="trust-badge">{t('promo.badge')}</span>
+                    <h2 class="trust-title">{t('promo.title')}</h2>
+                    <p class="trust-subtitle">{t('promo.subtitle')}</p>
+                    <ul class="trust-list">
+                        <li class="trust-list-item"><Icon name="lucide:check" class="list-icon" /> {t('promo.list.1')}</li>
+                        <li class="trust-list-item"><Icon name="lucide:check" class="list-icon" /> {t('promo.list.2')}</li>
+                        <li class="trust-list-item"><Icon name="lucide:check" class="list-icon" /> {t('promo.list.3')}</li>
                     </ul>
                 </div>
-
-                <div class="call-out-note">
-                    <p>{t('map.callout')}</p>
+                
+                <div class="trust-action">
+                    <a class="trust-btn" href={`tel:${t('contact.phone')}`}>
+                        <Icon name="lucide:phone-call" class="btn-icon" />
+                        {t('promo.cta')}
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="gallery container fade-in-up">
-        <h2>{t('gallery.title')}</h2>
-        <div class="slider-container">
-            <div class="slider">
-                {galleryImages.map((img, index) => (
-                        <div class="slide">
-                            <div class="placeholder-img">Minta Kép {index + 1}</div>
+    <section class="features-row fade-in-up">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <Icon name="lucide:award" />
+                    </div>
+                    <div>
+                        <h3 class="feature-title">{t('trust.1.title')}</h3>
+                        <p class="feature-desc">{t('trust.1.text')}</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <Icon name="lucide:shield-check" />
+                    </div>
+                    <div>
+                        <h3 class="feature-title">{t('trust.2.title')}</h3>
+                        <p class="feature-desc">{t('trust.2.text')}</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <Icon name="lucide:sparkles" />
+                    </div>
+                    <div>
+                        <h3 class="feature-title">{t('trust.3.title')}</h3>
+                        <p class="feature-desc">{t('trust.3.text')}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="brands-section py-20 bg-background-light fade-in-up">
+        <div class="container text-center">
+            <h2 class="section-title">{t('marquee.brands.title')}</h2>
+            <p class="section-subtitle">{t('marquee.brands.subtitle')}</p>
+            
+            <div class="brands-flex">
+                {brands.map(brand => (
+                    <div class="brand-chip">
+                        <Icon name="lucide:check-circle" class="brand-check" />
+                        <span class="brand-name">{brand}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section bg-slate-50 py-20 fade-in-up">
+        <div class="container">
+            <div class="section-header text-center mb-16">
+                <h2 class="section-title">{t('feature.title')}</h2>
+                <p class="section-subtitle">{t('feature.subtitle')}</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card group">
+                    <div class="service-icon-wrapper blue">
+                        <Icon name="lucide:wrench" class="service-icon" />
+                    </div>
+                    <h3 class="service-title">{t('feature.1.title')}</h3>
+                    <p class="service-desc">{t('feature.1.text')}</p>
+                </div>
+                
+                <div class="service-card group">
+                    <div class="service-icon-wrapper orange">
+                        <Icon name="lucide:flame" class="service-icon" />
+                    </div>
+                    <h3 class="service-title">{t('feature.2.title')}</h3>
+                    <p class="service-desc">{t('feature.2.text')}</p>
+                </div>
+                
+                <div class="service-card group">
+                    <div class="service-icon-wrapper green">
+                        <Icon name="lucide:package" class="service-icon" />
+                    </div>
+                    <h3 class="service-title">{t('feature.3.title')}</h3>
+                    <p class="service-desc">{t('feature.3.text')}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-area-section py-20 bg-background-light fade-in-up">
+        <div class="container">
+            <div class="section-header text-center mb-12">
+                <h2 class="section-title">{t('map.title')}</h2>
+                <p class="section-subtitle">{t('map.subtitle')}</p>
+            </div>
+
+            <div class="map-card">
+                <div class="map-grid">
+                    <div class="map-visual">
+                        <div class="map-placeholder">
+                            <InteractiveMap servicedCities={locations.pestCounty} />
                         </div>
+                    </div>
+                    
+                    <div class="map-content">
+                        <div class="map-content-header">
+                            <Icon name="lucide:map" class="map-icon" />
+                            <h3 class="map-content-title">{t('map.list.title')}</h3>
+                        </div>
+                        
+                        <div class="locations-grid">
+                            <ul class="locations-list">
+                                {locations.pestCounty.slice(0, Math.ceil(locations.pestCounty.length / 2)).map(city => (
+                                    <li class="location-item"><span class="location-dot"></span>{city}</li>
+                                ))}
+                            </ul>
+                            <ul class="locations-list">
+                                {locations.pestCounty.slice(Math.ceil(locations.pestCounty.length / 2)).map(city => (
+                                    <li class="location-item"><span class="location-dot"></span>{city}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        
+                        <div class="callout-box">
+                            <p class="callout-text">{t('map.callout')}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section py-20 bg-slate-50 fade-in-up">
+        <div class="container">
+            <h2 class="section-title text-center mb-12">{t('gallery.title')}</h2>
+            
+            <div class="gallery-grid">
+                {galleryImages.map((img, index) => (
+                    <div class="gallery-card group">
+                        <img
+                            src={img}
+                            alt={`Work Example ${index + 1}`}
+                            class="gallery-img"
+                            loading="lazy"
+                            decoding="async"
+                            width="640"
+                            height="400"
+                        />
+                        <div class="gallery-overlay">
+                            <span class="gallery-label">{t('gallery.label')} {index + 1}</span>
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>
@@ -173,374 +246,693 @@ const galleryImages = [
 </Layout>
 
 <style lang="scss">
-  .hero {
-    padding: 4rem 1.5rem 4rem;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-
-    .badge {
-      display: inline-block;
-      background: var(--gray-200);
-      color: var(--primary-dark);
-      padding: 0.5rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+        padding-top: 5rem;
+        padding-bottom: 6rem;
+        
+        &.hero-pattern {
+            background-color: var(--surface-light);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea580c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
     }
 
-    h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
-    .text-primary { color: var(--primary); }
-    p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem; }
-
-    .appliance-tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-
-      span {
-        background: rgba(var(--primary-rgb), 0.1);
-        color: var(--primary-dark);
-        padding: 0.4rem 1rem;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        border: 1px solid rgba(var(--primary-rgb), 0.2);
-      }
+    .hero-gradient-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: linear-gradient(to bottom, transparent, var(--background-light));
+        pointer-events: none;
+        
+        .dark & {
+            background: linear-gradient(to bottom, transparent, var(--background-dark));
+        }
     }
 
-    .buttons { display: flex; gap: 1rem; justify-content: center; }
-
-    @media(max-width: 768px) {
-      h1 { font-size: 2.5rem; }
-      .buttons { flex-direction: column; }
+    .hero-container {
+        position: relative;
+        z-index: 10;
     }
-  }
 
-  .promo-banner {
-    margin-bottom: 3rem;
-
-    .promo-content {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: var(--white);
-      border-radius: 12px;
-      padding: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      box-shadow: var(--shadow-md);
-
-      @media (max-width: 800px) {
-        flex-direction: column;
+    .hero-content {
         text-align: center;
-        padding: 2.5rem 1.5rem;
-      }
+        max-width: 56rem;
+        margin: 0 auto;
     }
 
-    .promo-badge {
-      background: var(--accent);
-      color: var(--white);
-      padding: 0.4rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.375rem 1rem;
+        border-radius: var(--radius-full);
+        background-color: #ffedd5;
+        color: var(--primary);
+        font-weight: 500;
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #fed7aa;
+        
+        .dark & {
+            background-color: rgba(124, 45, 18, 0.3);
+            border-color: #9a3412;
+        }
+
+        .badge-icon {
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
     }
 
-    h2 {
-      font-size: 2.2rem;
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: var(--white);
-      line-height: 1.2;
+    .hero-title {
+        font-size: 2.25rem;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        margin-bottom: 1.5rem;
+        color: var(--slate-900);
+        
+        @media (min-width: 768px) {
+            font-size: 3.75rem;
+        }
     }
 
-    p {
-      font-size: 1.15rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.9);
+    .hero-subtitle {
+        margin-top: 1rem;
+        font-size: 1.25rem;
+        color: var(--slate-600);
+        max-width: 42rem;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        font-size: 1.1rem;
-        margin-bottom: 0.6rem;
-        font-weight: 600;
-        color: var(--white);
-      }
+    .hero-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 2rem;
     }
 
-    .promo-action {
-      flex-shrink: 0;
+    .hero-tag {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background-color: var(--white);
+        border-radius: var(--radius-lg);
+        font-size: 0.875rem;
+        color: var(--slate-600);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--slate-200);
+        
+        .dark & {
+            background-color: var(--surface-dark);
+            color: var(--slate-300);
+            border-color: var(--slate-700);
+        }
+
+        .tag-icon {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
     }
 
-    .promo-btn {
-      background: var(--white);
-      color: var(--primary-dark);
-      font-size: 1.2rem;
-      font-weight: 700;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s, background 0.3s;
-      display: inline-block;
-      text-decoration: none;
-
-      &:hover {
-        transform: translateY(-3px);
-        background: var(--gray-100);
-      }
+    .hero-actions {
+        margin-top: 2.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
     }
-  }
 
-  .trust-banner {
-    background-color: var(--dark);
-    color: var(--white);
-    padding: 2.5rem 1.5rem;
-    margin-bottom: 3rem;
+    .trust-banner {
+        margin-top: -2.5rem;
+        position: relative;
+        z-index: 20;
+    }
+
+    .trust-card {
+        background-color: var(--primary);
+        border-radius: var(--radius-2xl);
+        padding: 2rem;
+        box-shadow: var(--shadow-2xl);
+        position: relative;
+        overflow: hidden;
+        
+        @media (min-width: 768px) {
+            padding: 3rem;
+        }
+    }
+
+    .trust-glow-1 {
+        position: absolute;
+        top: -6rem;
+        right: -6rem;
+        width: 16rem;
+        height: 16rem;
+        background-color: #f97316;
+        border-radius: var(--radius-full);
+        opacity: 0.5;
+        filter: blur(48px);
+    }
+
+    .trust-glow-2 {
+        position: absolute;
+        bottom: -6rem;
+        left: -6rem;
+        width: 16rem;
+        height: 16rem;
+        background-color: #c2410c;
+        border-radius: var(--radius-full);
+        opacity: 0.5;
+        filter: blur(48px);
+    }
 
     .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-
-      .trust-icon {
-        font-size: 2rem;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 0.8rem;
-        border-radius: 12px;
-      }
-
-      strong {
-        display: block;
-        font-size: 1.1rem;
-        margin-bottom: 0.3rem;
-        color: var(--white);
-      }
-
-      p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--gray-200);
-        line-height: 1.4;
-      }
-    }
-  }
-
-  .features {
-    padding: 5rem 1.5rem;
-    .section-header { text-align: center; margin-bottom: 3rem; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background: var(--white);
-      padding: 2.5rem;
-      border-radius: 8px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-      h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-      p { color: var(--text-muted); margin: 0; }
-    }
-  }
-
-  .brands-section {
-    padding: 2rem 1.5rem 5rem;
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-      h2 { margin-bottom: 0.5rem; }
-      p { color: var(--text-muted); font-size: 1.1rem; }
-    }
-
-    .brand-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .brand-card {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s, box-shadow 0.2s;
-      font-weight: 600;
-      color: var(--dark);
-      font-size: 1.1rem;
-
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
-        border-color: var(--primary);
-      }
-
-      .check-icon {
-        background: rgba(var(--primary-rgb), 0.1);
-        color: var(--primary);
-        width: 24px;
-        height: 24px;
-        display: flex;
+        display: grid;
+        gap: 2rem;
         align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-size: 0.9rem;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .service-area {
-    padding: 5rem 1.5rem;
-
-    .section-header { text-align: center; margin-bottom: 3rem; }
-
-    .map-layout {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 3rem;
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-
-      @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
-    .map-container {
-      width: 100%;
-      height: 100%;
-      min-height: 400px;
-
-      iframe {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+    .trust-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--radius-md);
+        background-color: rgba(0, 0, 0, 0.2);
+        color: var(--white);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
     }
 
-    .locations-box {
-      padding: 2.5rem;
+    .trust-title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 1rem;
+    }
 
-      h3 { margin-top: 0; margin-bottom: 1.5rem; font-size: 1.4rem;}
-
-      .location-group {
+    .trust-subtitle {
+        color: #fff7ed;
         margin-bottom: 1.5rem;
+        font-size: 1.125rem;
+    }
 
-        strong { font-size: 1.1rem; color: var(--dark); }
-        .pin { margin-right: 0.5rem; }
-      }
-
-      .city-list {
+    .trust-list {
         list-style: none;
         padding: 0;
-        margin: 1rem 0 0 1.5rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.9);
+        display: flex;
+        flex-direction: column;
         gap: 0.5rem;
-
-        li {
-          color: var(--text-main);
-          font-size: 0.95rem;
-          position: relative;
-
-          &::before {
-            content: '•';
-            color: var(--primary);
-            position: absolute;
-            left: -1rem;
-          }
+        
+        .trust-list-item {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            
+            .list-icon {
+                margin-right: 0.5rem;
+                font-size: 1.25rem;
+            }
         }
-      }
+    }
 
-      .call-out-note {
-        margin-top: 2rem;
+    .trust-action {
+        display: flex;
+        justify-content: center;
+        
+        @media (min-width: 768px) {
+            justify-content: flex-end;
+        }
+    }
+
+    .trust-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: var(--white);
+        color: var(--primary);
+        border-radius: var(--radius-xl);
+        font-weight: 700;
+        box-shadow: var(--shadow-lg);
+        text-decoration: none;
+        transition: transform 0.3s, background-color 0.3s;
+        
+        &:hover {
+            background-color: #f9fafb;
+            transform: scale(1.05);
+        }
+
+        .btn-icon {
+            margin-right: 0.5rem;
+        }
+    }
+
+    .features-row {
+        background-color: var(--slate-900);
+        padding: 3rem 0;
+        margin-top: 4rem;
+        
+        .dark & {
+            background-color: var(--black);
+        }
+    }
+
+    .features-grid {
+        display: grid;
+        gap: 2rem;
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
         padding: 1rem;
-        background-color: var(--gray-100);
-        border-left: 4px solid var(--accent);
-        border-radius: 4px;
-        p { margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--text-main);}
-      }
+        
+        .feature-icon-wrapper {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            border-radius: var(--radius-full);
+            background-color: var(--slate-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .feature-title {
+            color: var(--white);
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .feature-desc {
+            color: var(--slate-400);
+            font-size: 0.875rem;
+            line-height: 1.625;
+            margin: 0;
+        }
     }
-  }
 
-  .gallery {
-    padding: 5rem 1.5rem;
-    h2 { text-align: center; margin-bottom: 2rem; }
-
-    .slider-container {
-      width: 100%;
-      overflow: hidden;
+    .py-20 {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
     }
-    .slider {
-      display: flex;
-      gap: 1.5rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 1rem;
 
-      &::-webkit-scrollbar { display: none; }
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .bg-background-light {
+        background-color: var(--background-light);
+        .dark & {
+            background-color: var(--background-dark);
+        }
     }
-    .slide {
-      flex: 0 0 80%;
-      max-width: 600px;
-      scroll-snap-align: center;
-      border-radius: 8px;
-      overflow: hidden;
 
-      .placeholder-img {
-        width: 100%;
-        height: 350px;
-        background-color: var(--gray-200);
+    .bg-slate-50 {
+        background-color: var(--slate-50);
+        .dark & {
+            background-color: #202023;
+        }
+    }
+
+    .section-title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        color: var(--slate-900);
+        margin-bottom: 0.75rem;
+        
+        .dark & {
+            color: var(--white);
+        }
+    }
+
+    .section-subtitle {
+        color: var(--slate-600);
+        margin-bottom: 2.5rem;
+        
+        .dark & {
+            color: var(--slate-400);
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .mb-12 {
+        margin-bottom: 3rem;
+    }
+
+    .mb-16 {
+        margin-bottom: 4rem;
+    }
+
+    .brands-flex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .brand-chip {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--white);
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--slate-100);
+        transition: box-shadow 0.3s;
+        
+        &:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .dark & {
+            background-color: var(--surface-dark);
+            border-color: var(--slate-800);
+        }
+
+        .brand-check {
+            font-size: 0.875rem;
+            
+            &:nth-child(even) { color: #16a34a; }
+            &:nth-child(odd) { color: #ea580c; }
+        }
+
+        .brand-name {
+            font-weight: 600;
+            color: var(--slate-700);
+            
+            .dark & {
+                color: var(--slate-200);
+            }
+        }
+    }
+
+    .services-grid {
+        display: grid;
+        gap: 2rem;
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .service-card {
+        background-color: var(--white);
+        border-radius: var(--radius-2xl);
+        padding: 2rem;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid var(--slate-100);
+        transition: box-shadow 0.3s;
+        
+        &:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .dark & {
+            background-color: var(--surface-dark);
+            border-color: var(--slate-700);
+        }
+        
+        .service-icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s;
+            
+            &.blue {
+                background-color: #eff6ff;
+                .dark & { background-color: rgba(30, 58, 138, 0.3); }
+                .service-icon { color: #2563eb; }
+            }
+            
+            &.orange {
+                background-color: #fff7ed;
+                .dark & { background-color: rgba(124, 45, 18, 0.3); }
+                .service-icon { color: #ea580c; }
+            }
+            
+            &.green {
+                background-color: #f0fdf4;
+                .dark & { background-color: rgba(20, 83, 45, 0.3); }
+                .service-icon { color: #16a34a; }
+            }
+        }
+        
+        &:hover {
+            .service-icon-wrapper {
+                background-color: rgba(var(--primary-rgb), 0.1);
+            }
+            .service-icon {
+                color: var(--primary);
+            }
+        }
+
+        .service-icon {
+            font-size: 1.875rem;
+            transition: color 0.3s;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+            
+            .dark & {
+                color: var(--white);
+            }
+        }
+
+        .service-desc {
+            color: var(--slate-600);
+            font-size: 0.875rem;
+            line-height: 1.625;
+            margin: 0;
+            
+            .dark & {
+                color: var(--slate-400);
+            }
+        }
+    }
+
+    .map-card {
+        background-color: var(--white);
+        border-radius: var(--radius-3xl);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--slate-100);
+        overflow: hidden;
+        
+        .dark & {
+            background-color: var(--surface-dark);
+            border-color: var(--slate-700);
+        }
+    }
+
+    .map-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .map-visual {
+        background-color: var(--slate-50);
+        padding: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--text-muted);
-        font-size: 1.5rem;
-      }
-
-      img {
-        width: 100%;
-        height: 350px;
-        object-fit: cover;
-        display: block;
-      }
+        position: relative;
+        min-height: 400px;
+        
+        .dark & {
+            background-color: var(--slate-800);
+        }
     }
-  }
+
+    .map-placeholder {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        :global(.map-container) {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+        }
+    }
+
+    .map-content {
+        padding: 2rem;
+        
+        @media (min-width: 768px) {
+            padding: 3rem;
+        }
+    }
+
+    .map-content-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+
+        .map-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .map-content-title {
+            font-size: 1.25rem;
+            color: var(--slate-900);
+            margin: 0;
+            
+            .dark & {
+                color: var(--white);
+            }
+        }
+    }
+
+    .locations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        row-gap: 0.75rem;
+    }
+
+    .locations-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--slate-600);
+            
+            .dark & {
+                color: var(--slate-300);
+            }
+
+            .location-dot {
+                width: 0.375rem;
+                height: 0.375rem;
+                background-color: var(--primary);
+                border-radius: var(--radius-full);
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .callout-box {
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #fff7ed;
+        border-left: 4px solid var(--primary);
+        border-top-right-radius: var(--radius-lg);
+        border-bottom-right-radius: var(--radius-lg);
+        
+        .dark & {
+            background-color: rgba(124, 45, 18, 0.2);
+        }
+
+        .callout-text {
+            color: var(--slate-700);
+            font-size: 0.875rem;
+            font-style: italic;
+            margin: 0;
+            
+            .dark & {
+                color: var(--slate-300);
+            }
+        }
+    }
+
+    .gallery-grid {
+        display: grid;
+        gap: 1.5rem;
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .gallery-card {
+        background-color: var(--slate-200);
+        border-radius: var(--radius-2xl);
+        height: 16rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        
+        @media (min-width: 768px) {
+            height: 20rem;
+        }
+        
+        .dark & {
+            background-color: var(--slate-700);
+        }
+
+        .gallery-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        &:hover .gallery-img {
+            transform: scale(1.1);
+        }
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        .gallery-card:hover & {
+            opacity: 1;
+        }
+
+        .gallery-label {
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.125rem;
+        }
+    }
 </style>

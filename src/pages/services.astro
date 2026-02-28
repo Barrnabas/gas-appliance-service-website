@@ -1,33 +1,43 @@
 ---
 import Layout from '../layouts/layout.astro';
 import { useTranslations } from '../i18n/utils';
+import { Icon } from 'astro-icon/components';
 
 const t = useTranslations();
 ---
 
 <Layout title={`${t('nav.services')} | ${t('site.title')}`}>
 
-    <section class="page-hero container">
+    <header class="page-hero">
         <div class="content">
             <span class="eyebrow">{t('services.title')}</span>
-            <h1>{t('services.subtitle')}</h1>
+            <h1>
+                {t('services.hero.title.1')}<span class="text-primary">{t('services.hero.title.2')}</span>
+            </h1>
+            <p class="hero-desc">
+                {t('services.hero.desc')}
+            </p>
         </div>
-    </section>
+    </header>
 
-    <section class="services-list container">
+    <section class="services-section container">
 
         <div class="consumer-grid">
             <div class="service-card">
-                <div class="icon-wrapper">🧹</div>
+                <div class="icon-wrapper orange">
+                    <Icon name="lucide:sparkles" />
+                </div>
                 <div class="card-content">
                     <h3>{t('service.1.name')}</h3>
                     <p class="desc">{t('service.1.desc')}</p>
                 </div>
             </div>
 
-            <div class="service-card highlight-border">
-                <div class="popular-badge">{t('service.2.badge')}</div>
-                <div class="icon-wrapper">🔧</div>
+            <div class="service-card highlight-card">
+                <div class="popular-badge">{t('service.2.badge') || 'Gyakori'}</div>
+                <div class="icon-wrapper blue">
+                    <Icon name="lucide:wrench" />
+                </div>
                 <div class="card-content">
                     <h3>{t('service.2.name')}</h3>
                     <p class="desc">{t('service.2.desc')}</p>
@@ -35,7 +45,9 @@ const t = useTranslations();
             </div>
 
             <div class="service-card">
-                <div class="icon-wrapper">⚙️</div>
+                <div class="icon-wrapper gray">
+                    <Icon name="lucide:settings" />
+                </div>
                 <div class="card-content">
                     <h3>{t('service.3.name')}</h3>
                     <p class="desc">{t('service.3.desc')}</p>
@@ -43,7 +55,9 @@ const t = useTranslations();
             </div>
 
             <div class="service-card">
-                <div class="icon-wrapper">🔥</div>
+                <div class="icon-wrapper red">
+                    <Icon name="lucide:flame" />
+                </div>
                 <div class="card-content">
                     <h3>{t('service.4.name')}</h3>
                     <p class="desc">{t('service.4.desc')}</p>
@@ -51,12 +65,13 @@ const t = useTranslations();
             </div>
         </div>
 
-        <div class="b2b-card">
-            <div class="b2b-icon">📋</div>
+        <div class="b2b-card relative">
+            <div class="b2b-pattern"></div>
+            <div class="b2b-icon">
+                <Icon name="lucide:clipboard-list" />
+            </div>
             <div class="b2b-content">
-                <div class="b2b-header">
-                    <h3>{t('service.5.name')}</h3>
-                </div>
+                <h3>{t('service.5.name')}</h3>
                 <p class="desc">{t('service.5.desc')}</p>
             </div>
         </div>
@@ -68,28 +83,34 @@ const t = useTranslations();
         </div>
     </section>
 
-    <section class="process container">
-        <h2>{t('process.title')}</h2>
-        <div class="timeline">
-            <div class="step">
-                <div class="number">01</div>
-                <div class="content">
-                    <h3>{t('process.1.title')}</h3>
-                    <p>{t('process.1.desc')}</p>
+    <section class="process-section">
+        <div class="container">
+            <h2>{t('process.title')}</h2>
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>{t('process.1.title')}</h3>
+                        <p>{t('process.1.desc')}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="step">
-                <div class="number">02</div>
-                <div class="content">
-                    <h3>{t('process.2.title')}</h3>
-                    <p>{t('process.2.desc')}</p>
+                
+                <div class="timeline-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>{t('process.2.title')}</h3>
+                        <p>{t('process.2.desc')}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="step">
-                <div class="number">03</div>
-                <div class="content">
-                    <h3>{t('process.3.title')}</h3>
-                    <p>{t('process.3.desc')}</p>
+                
+                <div class="timeline-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>{t('process.3.title')}</h3>
+                        <p>{t('process.3.desc')}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,239 +119,394 @@ const t = useTranslations();
 </Layout>
 
 <style lang="scss">
-  .page-hero {
-    padding: 4rem 1.5rem 2rem;
-    .content {
-      max-width: 1000px;
-      text-align: center;
-      margin: 0 auto;
-      .eyebrow {
-        color: var(--primary);
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.9rem;
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-      h1 {
-        font-size: 3rem;
-        margin-top: 0;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-      }
-    }
-  }
-
-  .services-list {
-    padding: 2rem 1.5rem 6rem;
-    max-width: 1000px;
-    margin: 0 auto;
-
-    /* 2x2 Grid for Residential Services */
-    .consumer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      margin-bottom: 2rem;
-
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr; /* Stacks to 1 column on mobile */
-      }
-    }
-
-    /* Modern List-Style Cards */
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      padding: 2rem;
-      border-radius: 12px;
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-md);
-      }
-
-      &.highlight-border {
-        border: 2px solid var(--accent);
-      }
-
-      .popular-badge {
-        position: absolute;
-        top: -12px;
-        right: 20px;
-        background: var(--accent);
-        color: white;
-        padding: 0.2rem 1rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-
-      .icon-wrapper {
-        flex-shrink: 0;
-        width: 60px;
-        height: 60px;
-        background: rgba(var(--primary-rgb), 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-      }
-
-      .card-content {
-        h3 {
-          margin: 0 0 0.5rem 0;
-          font-size: 1.3rem;
-          color: var(--dark);
-        }
-        .desc {
-          color: var(--text-muted);
-          margin-bottom: 1rem;
-          line-height: 1.5;
-          font-size: 0.95rem;
-        }
-      }
-    }
-
-    /* Wide Horizontal Card for B2B */
-    .b2b-card {
-      background: var(--dark);
-      color: var(--white);
-      border-radius: 12px;
-      padding: 2.5rem;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      margin-bottom: 4rem;
-      box-shadow: var(--shadow-md);
-
-      @media (max-width: 768px) {
-        flex-direction: column;
+    .page-hero {
+        position: relative;
+        padding: 5rem 1.5rem 3rem;
         text-align: center;
-      }
+        background-color: var(--surface-light);
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea580c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        
+        .dark & {
+            background-color: var(--background-dark);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea580c' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: linear-gradient(to bottom, transparent, var(--background-light));
+            pointer-events: none;
+            
+            .dark & { background: linear-gradient(to bottom, transparent, var(--background-dark)); }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 42rem;
+            margin: 0 auto;
+            
+            .eyebrow {
+                color: var(--primary);
+                font-weight: 700;
+                font-size: 0.875rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+            
+            h1 {
+                font-size: 2.25rem;
+                font-weight: 800;
+                line-height: 1.25;
+                color: var(--slate-900);
+                margin-bottom: 1.5rem;
+                
+                @media (min-width: 768px) { font-size: 3rem; }
+                @media (min-width: 1024px) { font-size: 3.75rem; }
+                .dark & { color: var(--white); }
+            }
+            
+            p {
+                font-size: 1.25rem;
+                color: var(--slate-600);
+                margin-top: 1rem;
+                .dark & { color: var(--slate-300); }
+            }
+        }
+    }
 
-      .b2b-icon {
-        flex-shrink: 0;
-        width: 80px;
-        height: 80px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-      }
+    .services-section {
+        padding-bottom: 5rem;
+        position: relative;
+        z-index: 20;
 
-      .b2b-content {
-        flex-grow: 1;
-
-        .b2b-header {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 0.5rem;
-
-          @media (max-width: 768px) {
+        .consumer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--slate-100);
+            display: flex;
             flex-direction: column;
-            justify-content: center;
-          }
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: transform 0.3s, box-shadow 0.3s;
+            
+            @media (min-width: 640px) { flex-direction: row; }
+            .dark & {
+                background-color: var(--surface-dark);
+                border-color: var(--slate-700);
+            }
+            
+            &:hover { box-shadow: var(--shadow-hover); }
+            
+            &.highlight-card {
+                border: 2px solid var(--slate-800);
+                position: relative;
+                
+                .dark & { border-color: var(--slate-600); }
+                
+                .popular-badge {
+                    position: absolute;
+                    top: -0.75rem;
+                    right: 1.5rem;
+                    background-color: var(--slate-800);
+                    color: var(--white);
+                    font-size: 0.625rem;
+                    font-weight: 700;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 9999px;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                }
+            }
+            
+            .icon-wrapper {
+                width: 4rem;
+                height: 4rem;
+                border-radius: var(--radius-xl);
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background-color 0.3s;
+                
+                :global(svg) {
+                    width: 1.875rem;
+                    height: 1.875rem;
+                    transition: color 0.3s;
+                }
+                
+                &.orange {
+                    background-color: #fff7ed;
+                    .dark & { background-color: rgba(124, 45, 18, 0.3); }
+                    :global(svg) { color: #ea580c; .dark & { color: #f97316; } }
+                }
+                &.blue {
+                    background-color: #eff6ff;
+                    .dark & { background-color: rgba(30, 58, 138, 0.3); }
+                    :global(svg) { color: #2563eb; .dark & { color: #60a5fa; } }
+                }
+                &.gray {
+                    background-color: #f9fafb;
+                    .dark & { background-color: #1f2937; }
+                    :global(svg) { color: var(--slate-600); .dark & { color: var(--slate-400); } }
+                }
+                &.red {
+                    background-color: #fef2f2;
+                    .dark & { background-color: rgba(127, 29, 29, 0.3); }
+                    :global(svg) { color: #dc2626; .dark & { color: #f87171; } }
+                }
+            }
+            
+            &:hover .icon-wrapper {
+                background-color: rgba(var(--primary-rgb), 0.1) !important;
+                :global(svg) { color: var(--primary) !important; }
+            }
+            &:hover.highlight-card .icon-wrapper.blue {
+                 background-color: #dbeafe !important;
+                 .dark & { background-color: rgba(30, 58, 138, 0.5) !important; }
+            }
+            
+            .card-content {
+                h3 {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    color: var(--slate-900);
+                    margin-bottom: 0.5rem;
+                    margin-top: 0;
+                    .dark & { color: var(--white); }
+                }
+                
+                .desc {
+                    color: var(--slate-600);
+                    font-size: 0.875rem;
+                    line-height: 1.625;
+                    margin: 0;
+                    .dark & { color: var(--slate-400); }
+                }
+            }
+        }
 
-          h3 {
-            margin: 0;
-            font-size: 1.6rem;
-            color: var(--white);
-          }
-          .corp-badge {
-            background: var(--primary);
-            color: var(--white);
-            padding: 0.2rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+        .b2b-card {
+            margin-top: 2rem;
+            background-color: var(--slate-900);
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            
+            .dark & { background-color: var(--black); }
+            
+            @media (min-width: 768px) {
+                padding: 3rem;
+                flex-direction: row;
+            }
+            
+            .b2b-pattern {
+                position: absolute;
+                inset: 0;
+                opacity: 0.1;
+                background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+            }
+            
+            .b2b-icon {
+                width: 5rem;
+                height: 5rem;
+                background-color: var(--slate-800);
+                border-radius: 9999px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 10;
+                border: 1px solid var(--slate-700);
+                
+                :global(svg) {
+                    color: #f97316; // orange-500
+                    width: 2.25rem;
+                    height: 2.25rem;
+                }
+            }
+            
+            .b2b-content {
+                position: relative;
+                z-index: 10;
+                text-align: center;
+                
+                @media (min-width: 768px) {
+                    text-align: left;
+                }
+                
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: var(--white);
+                    margin-bottom: 0.5rem;
+                    margin-top: 0;
+                    
+                    @media (min-width: 768px) { font-size: 1.875rem; }
+                }
+                
+                .desc {
+                    color: var(--slate-400);
+                    font-size: 1.125rem;
+                    max-width: 48rem;
+                    margin: 0;
+                }
+            }
+        }
+
+        .services-cta {
+            margin-top: 3rem;
+            background-color: var(--white);
+            border: 1px solid var(--slate-200);
+            border-radius: var(--radius-2xl);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            
+            .dark & {
+                background-color: var(--surface-dark);
+                border-color: var(--slate-700);
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--slate-900);
+                margin-bottom: 1rem;
+                margin-top: 0;
+                .dark & { color: var(--white); }
+            }
+            
+            p {
+                color: var(--slate-600);
+                margin-bottom: 2rem;
+                .dark & { color: var(--slate-400); }
+            }
+        }
+    }
+
+    .process-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        background-color: var(--slate-50);
+        
+        .dark & {
+            background-color: #202023;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
             font-weight: 700;
-          }
+            text-align: center;
+            color: var(--slate-900);
+            margin-bottom: 4rem;
+            margin-top: 0;
+            
+            .dark & { color: var(--white); }
         }
-
-        .desc {
-          color: var(--gray-200);
-          margin-bottom: 1.5rem;
-          line-height: 1.6;
+        
+        .timeline-container {
+            max-width: 56rem;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 1rem;
+            
+            .timeline-line {
+                position: absolute;
+                left: 2.5rem;
+                top: 0;
+                bottom: 0;
+                width: 2px;
+                background-color: var(--slate-200);
+                
+                .dark & { background-color: var(--slate-700); }
+                
+                @media (min-width: 768px) {
+                    left: 3rem;
+                }
+            }
+            
+            .timeline-step {
+                position: relative;
+                padding-left: 5rem;
+                padding-bottom: 3rem;
+                
+                @media (min-width: 768px) {
+                    padding-left: 6rem;
+                }
+                
+                &:last-child {
+                    padding-bottom: 0;
+                }
+                
+                .step-number {
+                    position: absolute;
+                    left: 1rem;
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 9999px;
+                    background-color: var(--primary);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: var(--white);
+                    font-weight: 700;
+                    font-size: 1.125rem;
+                    box-shadow: var(--shadow-lg);
+                    border: 4px solid var(--slate-50);
+                    z-index: 10;
+                    
+                    .dark & { border-color: #202023; }
+                    
+                    @media (min-width: 768px) {
+                        left: 1.25rem;
+                        width: 3.5rem;
+                        height: 3.5rem;
+                    }
+                }
+                
+                .step-content {
+                    h3 {
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        color: var(--primary);
+                        margin-bottom: 0.5rem;
+                        margin-top: 0;
+                    }
+                    
+                    p {
+                        color: var(--slate-600);
+                        line-height: 1.625;
+                        margin: 0;
+                        
+                        .dark & { color: var(--slate-400); }
+                    }
+                }
+            }
         }
-      }
     }
-
-    /* Reusable Price Tag */
-    .price-tag {
-      font-weight: 700;
-      color: var(--primary);
-      background: rgba(var(--primary-rgb), 0.1);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      display: inline-block;
-      font-size: 0.9rem;
-    }
-
-    .b2b-card .price-tag {
-      background: rgba(255, 255, 255, 0.15);
-      color: var(--white);
-    }
-
-    /* Call to Action */
-    .services-cta {
-      background: var(--light);
-      border: 1px solid var(--gray-200);
-      text-align: center;
-      padding: 3rem 2rem;
-      border-radius: 12px;
-
-      h3 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.6rem; color: var(--dark); }
-      p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
-      .btn-primary { font-size: 1.1rem; padding: 0.8rem 2rem; }
-    }
-  }
-
-  .process {
-    padding: 2rem 1.5rem 6rem;
-    h2 { text-align: center; margin-bottom: 3rem; font-size: 2rem; }
-
-    .timeline {
-      max-width: 800px;
-      margin: 0 auto;
-      border-left: 2px solid var(--gray-200);
-      padding-left: 2rem;
-    }
-
-    .step {
-      position: relative;
-      margin-bottom: 3rem;
-
-      .number {
-        position: absolute;
-        left: -3.3rem;
-        width: 40px;
-        height: 40px;
-        background: var(--primary);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        box-shadow: 0 0 0 5px var(--white);
-      }
-
-      .content {
-        h3 { margin: 0 0 0.5rem 0; color: var(--primary); font-size: 1.3rem; }
-        p { margin: 0; color: var(--text-main); line-height: 1.5; }
-      }
-    }
-  }
 </style>

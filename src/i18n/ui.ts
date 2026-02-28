@@ -6,7 +6,6 @@ export const translations = {
 
     'site.title': 'Laczkó Gázszervíz',
 
-    // Promo Banner
     'promo.badge': 'Aktuális ajánlat',
     'promo.title': 'Készülékcsere előtt áll? Ingyenes tanácsadás!',
     'promo.subtitle': 'Szeretném eloszlatni a bizonytalanságot az egyszerűsített gázkészülék-cserével kapcsolatban. Nincs macerás ügyintézés, ha hivatalos, akkreditált szerelő intézi!',
@@ -51,6 +50,7 @@ export const translations = {
     'map.list.title': 'Főbb kiszállási települések:',
     'map.callout': 'Időpont egyeztetésért és további információkért keressen bizalommal a hét minden napján!',
     'gallery.title': 'Korábbi Munkáim',
+    'gallery.label': 'Minta Kép',
 
     'about.title': 'Rólam',
     'about.subtitle': 'Tüzeléstechnikai mester és akreditált gázszerelő',
@@ -67,6 +67,9 @@ export const translations = {
 
     'services.title': 'Szolgáltatásaim',
     'services.subtitle': 'Miben tudok segíteni?',
+    'services.hero.title.1': 'Miben tudok ',
+    'services.hero.title.2': 'segíteni?',
+    'services.hero.desc': 'Gázkészülékek szakszerű javítása, karbantartása és beüzemelése precizitással és garanciával.',
     'pricing.title': 'Szolgáltatások',
     'services.cta.title': 'Időpontot kérne vagy kérdése van?',
     'services.cta.desc': 'Keressen bizalommal, és megbeszéljük a részleteket!',

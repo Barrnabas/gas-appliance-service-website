@@ -1,7 +1,7 @@
 ﻿import L from 'leaflet';
-import {parseCities} from "../components/utils/mapUtils.ts";
+import { parseCities } from "../components/utils/mapUtils.ts";
 import { escapeHtml } from "./utils.ts"
-import type {LeafletMapElement} from "../components/interface/leaflet.map.element.ts";
+import type { LeafletMapElement } from "../components/interface/leaflet.map.element.ts";
 
 let cachedGeoJson: any = null;
 
@@ -47,7 +47,8 @@ export async function initMap(mapContainerId: string, dataContainerId: string) {
                     color: "#ffffff",
                     weight: isServiced ? 2 : 1,
                     fillColor: isServiced ? "#dd6b20" : "#e2e8f0",
-                    fillOpacity: isServiced ? 0.8 : 0.6
+                    fillOpacity: isServiced ? 0.8 : 0.6,
+                    className: 'map-polygon-non-interactive'
                 };
             },
             onEachFeature: (feature: any, layer: L.Layer) => {
@@ -57,6 +58,7 @@ export async function initMap(mapContainerId: string, dataContainerId: string) {
 
                     layer.bindTooltip(escapeHtml(cityName), {
                         direction: "top",
+                        sticky: true,
                         className: isServiced ? "tooltip-serviced" : "tooltip-unserviced"
                     });
 
@@ -65,11 +67,22 @@ export async function initMap(mapContainerId: string, dataContainerId: string) {
                             const l = e.target;
                             l.setStyle({
                                 weight: 3,
+                                fillOpacity: isServiced ? 1.0 : 0.8,
                                 color: isServiced ? '#c05621' : '#94a3b8'
                             });
-                            l.bringToFront();
+
+                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                                l.bringToFront();
+                            }
                         },
-                        mouseout: (e) => geojsonLayer.resetStyle(e.target)
+                        mouseout: (e) => {
+                            geojsonLayer.resetStyle(e.target);
+                            e.target.closeTooltip();
+                        },
+                        click: (e) => {
+                            e.target.closeTooltip();
+                            L.DomEvent.stopPropagation(e as any);
+                        }
                     });
                 }
             }
