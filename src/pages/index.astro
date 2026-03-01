@@ -394,6 +394,7 @@ const galleryImages = [
         border-radius: var(--radius-full);
         opacity: 0.5;
         filter: blur(48px);
+        z-index: 1;
     }
 
     .trust-glow-2 {
@@ -406,12 +407,15 @@ const galleryImages = [
         border-radius: var(--radius-full);
         opacity: 0.5;
         filter: blur(48px);
+        z-index: 1;
     }
 
     .trust-grid {
         display: grid;
         gap: 2rem;
         align-items: center;
+        position: relative;
+        z-index: 10;
         
         @media (min-width: 768px) {
             grid-template-columns: repeat(2, 1fr);
