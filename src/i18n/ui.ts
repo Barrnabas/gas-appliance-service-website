@@ -50,7 +50,6 @@ export const translations = {
     'map.list.title': 'Főbb kiszállási települések:',
     'map.callout': 'Időpont egyeztetésért és további információkért keressen bizalommal a hét minden napján!',
     'gallery.title': 'Korábbi Munkáim',
-    'gallery.label': 'Minta Kép',
 
     'about.title': 'Rólam',
     'about.subtitle': 'Tüzeléstechnikai mester és akreditált gázszerelő',
